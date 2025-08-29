@@ -1,60 +1,33 @@
-/* Reset dasar */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Style body */
+/* Supaya tampilan menyesuaikan HP & Desktop */
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
-  line-height: 1.6;
 }
 
-/* Navigasi */
-header {
-  background: #1D4ED8;
+/* Bagian Header */
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  background-color: #333;
   padding: 10px 0;
 }
 
-.nav-links {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  gap: 20px;
-}
-
-.nav-links a {
+.navbar a {
   color: white;
   text-decoration: none;
-  padding: 8px 12px;
+  padding: 8px 15px;
   transition: background 0.3s;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
-  background: #2563EB;
+.navbar a:hover {
+  background-color: #555;
   border-radius: 5px;
 }
 
-/* Konten utama */
-main {
-  padding: 20px;
-  text-align: center;
-}
-
-/* Footer */
-footer {
-  background: #f1f1f1;
-  text-align: center;
-  padding: 10px;
-  margin-top: 20px;
-}
-
-/* Responsif: di HP menu jadi vertikal */
-@media (max-width: 768px) {
-  .nav-links {
-    flex-direction: column;
-    align-items: center;
+/* Supaya di HP tetap menyamping, tapi kalau layarnya super sempit, turun sendiri */
+@media (max-width: 400px) {
+  .navbar {
+    flex-wrap: wrap; /* kalau terlalu sempit, baru turun */
   }
 }
