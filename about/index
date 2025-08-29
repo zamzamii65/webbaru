@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trisha JKT48 — Fansite</title>
+  <meta name="description" content="Website buatan fans untuk Trisha JKT48: Ayo jelajahi dunia Trisha!." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💗</text></svg>">
+  <style>
+    :root{
+      --bg:#0f0f14; --card:#141421; --soft:#1b1b2e; --text:#eaeaf2; --sub:#bdbddb; --brand:#ff4da6; --brand-2:#8a5cff; --ok:#2dd4bf; --warn:#f59e0b;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);}
+    a{color:inherit}
+    .container{max-width:1100px;margin:0 auto;padding:0 16px}
+    header{position:sticky;top:0;z-index:40;background:rgba(15,15,20,.72);backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav{display:flex;align-items:center;gap:14px;justify-content:space-between;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
+    .brand .badge{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 6px 18px rgba(255,77,166,.35)}
+    .brand span{font-size:18px}
+    .nav-actions{display:flex;gap:10px;align-items:center}
+    .btn{border:0;border-radius:12px;padding:10px 14px;background:var(--soft);color:var(--text);cursor:pointer;font-weight:600}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 10px 20px rgba(138,92,255,.25);}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.1)}
+    .toggle{width:44px;height:28px;border-radius:999px;background:var(--soft);display:flex;align-items:center;padding:3px}
+    .dot{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#fff,#ddd);transform:translateX(0);transition:transform .25s ease}
+    .toggle.active .dot{transform:translateX(16px)}
+
+    /* Hero */
+    .hero{position:relative;overflow:hidden;background:radial-gradient(1200px 600px at 20% -20%,rgba(255,77,166,.25),transparent 60%),radial-gradient(1000px 500px at 100% 0,rgba(138,92,255,.25),transparent 55%);}
+    .hero .inner{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:42px 0}
+    .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:6px 12px;color:var(--sub);font-weight:600}
+    .title{font-size:46px;line-height:1.04;margin:12px 0 8px}
+    .lead{color:var(--sub);max-width:55ch}
+    .cta{display:flex;gap:10px;margin-top:14px}
+    .stats{display:flex;gap:18px;margin-top:14px;color:#dcdcf3}
+    .stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);padding:10px 12px;border-radius:12px}
+
+    /* Card grid */
+    .section{padding:36px 0}
+    .section h2{margin:0 0 12px}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .card{grid-column:span 12;background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:16px}
+    .card.shadow{box-shadow:0 10px 40px rgba(0,0,0,.35)}
+
+    /* Profile */
+    .profile{display:grid;grid-template-columns:140px 1fr;gap:16px;align-items:center}
+    .avatar{width:140px;height:140px;border-radius:16px;background:#212134;object-fit:cover;border:1px solid rgba(255,255,255,.08)}
+    .k{color:var(--sub)}
+
+    /* Schedule */
+    .toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px}
+    .pill{padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.12);cursor:pointer}
+    .pill.active{background:linear-gradient(135deg,rgba(255,77,166,.18),rgba(138,92,255,.18));border-color:transparent}
+    .schedule{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .event{display:flex;gap:12px;padding:12px;border-radius:14px;background:#191927;border:1px solid rgba(255,255,255,.06)}
+    .event .date{min-width:70px;text-align:center}
+    .event .date .d{font-size:22px;font-weight:800}
+    .event .date .m{color:var(--sub)}
+
+    /* Gallery */
+    .carousel{position:relative}
+    .track{display:flex;gap:12px;overflow:auto;scroll-behavior:smooth;padding-bottom:4px}
+    .track::-webkit-scrollbar{height:10px}
+    .track::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:999px}
+    .ph{width:260px;height:340px;background:#222338;border-radius:16px;border:1px solid rgba(255,255,255,.08);object-fit:cover}
+    .ctrl{position:absolute;inset:0;pointer-events:none}
+    .ctrl button{pointer-events:auto;position:absolute;top:45%;transform:translateY(-50%);border:0;background:rgba(20,20,35,.7);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.08);width:42px;height:42px;border-radius:12px;cursor:pointer}
+    .ctrl .prev{left:-12px}
+    .ctrl .next{right:-12px}
+
+    /* Fanboard */
+    .fanboard{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .fan-card{background:#191927;border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:14px}
+    .fan-card .meta{display:flex;justify-content:space-between;color:var(--sub);font-size:12px;margin-top:6px}
+
+    /* Footer */
+    footer{padding:32px 0;color:var(--sub)}
+
+    /* Floating hearts */
+    .heart{position:fixed;pointer-events:none;animation:float 1.2s ease-out forwards}
+    @keyframes float{0%{transform:translateY(0) scale(.8);opacity:.9}100%{transform:translateY(-100px) scale(1.4);opacity:0}}
+
+    /* Starfield bg */
+    .stars{position:absolute;inset:0;background-image:radial-gradient(2px 2px at 20% 30%,rgba(255,255,255,.6),transparent 50%),radial-gradient(1.8px 1.8px at 50% 70%,rgba(255,255,255,.5),transparent 50%),radial-gradient(1.6px 1.6px at 80% 20%,rgba(255,255,255,.5),transparent 50%);opacity:.6}
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .hero .inner{grid-template-columns:1fr}
+      .profile{grid-template-columns:100px 1fr}
+      .schedule{grid-template-columns:1fr}
+      .fanboard{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+  <div class="container nav">
+    <div class="brand">
+      <!-- Tombol menu -->
+      <button class="menu-btn" id="menuBtn">☰</button>
+      <!-- Pita -->
+      <div class="badge">🎀</div>
+      <span>Trisha JKT48 — Fansite</span>
+    </div>
+    <div class="nav-actions">
+      <a href="#fanboard" class="btn ghost">Tulis Pesan 💬</a>
+      <a href="#sosmed" class="btn primary">Follow</a>
+    </div>
+  </div>
+</header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="stars" aria-hidden="true"></div>
+      <div class="container inner">
+        <div>
+          <div class="chip">✨ Fansite Jazzlyn Trisha</div>
+          <h1 class="title">Trisha JKT48</h1>
+          <p class="lead">Selamat datang di fansite Trisha JKT48! Di sini kamu bisa menjelajahi profil, jadwal, dan momen spesial Trisha. Situs ini dibuat simpel, ringan, dan pastinya nyaman diakses dari perangkat apa pun.</p>
+          <div class="cta"></div>
+          <div class="stats">
+            <div class="stat">🗓️ Event Tersimpan: <strong id="savedCount">0</strong></div>
+          </div>
+        </div>
+        <div>
+          <img class="avatar" id="heroImg" alt="Foto Trisha (placeholder)" src="trisha1.jpg" />
+          <img class="avatar" id="heroImg" alt="Foto Trisha (placeholder)" src="foto5.jpg" />
+        </div>
+      </div>
+    </section>
+
+<!-- Musik autoplay -->
+<audio id="bg-music" autoplay loop>
+  <source src="lagu.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Tombol Musik -->
+<button id="music-toggle">🔊</button>
+
+<style>
+  #music-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: background 0.3s;
+  }
+  #music-toggle:hover {
+    background: #ff1493;
+  }
+</style>
+
+<!-- ===== SIDE MENU ===== -->
+<nav id="sideMenu" class="side-menu">
+  <a href="#profil">Profil</a>
+  <a href="#blog">Blog</a>
+  <a href="#sosmed">Sosial Media</a>
+  <a href="#jadwal">Jadwal</a>
+  <a href="#galeri">Galeri</a>
+  <a href="#video">Video Favorit</a>
+  <a href="#quiz">Kuis</a>
+  <a href="#freebies">Freebies</a>
+  <a href="#fanboard">Fanboard</a>
+</nav>
+<div id="overlay" class="overlay"></div>
+
+<!-- ===== STYLE ===== -->
+<style>
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 220px;
+    height: 100%;
+    background: var(--box-bg, #222);
+    box-shadow: 2px 0 6px rgba(0,0,0,0.3);
+    transition: left 0.3s ease;
+    z-index: 1000;
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .side-menu a {
+    padding: 12px 20px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .side-menu a:hover {
+    background: rgba(255,255,255,0.1);
+  }
+
+  .side-menu.open {
+    left: 0;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 999;
+  }
+
+  .overlay.show { display: block; }
+</style>
+
+<!-- ===== PROFILE ===== -->
+<section class="section" id="profil">
+  <div class="container grid">
+    <article class="card shadow hidden" style="grid-column:span 12">
+      <h2>Profil Singkat</h2>
+      <p>Jazzlyn Agatha Trisha (panggung: Trisha), lahir pada 16 Februari 2011 di Jakarta, adalah member termuda Generasi 12 JKT48. Pada ulang tahunnya yang ke-13, ia debut dalam setlist Ingin Bertemu (Aitakatta) sebagai trainee pertama gen 12 yang tampil di teater dan langsung menjadi center untuk unit song Revolusi Rio.</p>
+      <p>Selanjutnya, Trisha juga dipercaya menjadi Global Center untuk setlist trainee Pajama Drive, membawakan unit song Ekor Malaikat sejak 3 Mei 2025. menjadi Global Center untuk setlist trainee Ingin Bertemu (Aitakatta) sejak 10 Mei 2025.</p>
+      <p>Dengan golongan darah O dan zodiak Aquarius, Trisha punya hobi kreatif seperti melukis, menggambar, menari, membaca, dan menyukai anime seperti Haikyuu!!. Salam perkenalannya yang khas: “Pelukis yang hadir di mimpi-mimpi indahmu… One… two… tri… sha!”.</p>
+      <ul>
+    </article>
+  </div>
+</section>
+
+<style>
+  /* animasi scroll */
+  .hidden {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease-out;
+  }
+  .show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<!-- ===== COUNTDOWN ULANG TAHUN ===== -->
+<section class="section hidden" id="countdown">
+  <div class="container">
+    <article class="card shadow" style="text-align:center; padding:20px;">
+      <h2>🎂 Countdown Ultah Trisha 🎈</h2>
+      <p class="k">Hitung mundur menuju 16 Februari 🎀</p>
+      <div id="countdown-timer" class="countdown-box">
+        <div><span id="days">0</span><small>Hari</small></div>
+        <div><span id="hours">0</span><small>Jam</small></div>
+        <div><span id="minutes">0</span><small>Menit</small></div>
+        <div><span id="seconds">0</span><small>Detik</small></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  #countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 14px;
+  }
+  #countdown-timer div {
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    min-width: 70px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  #countdown-timer span {
+    display: block;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  #countdown-timer small {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+</style>
+
+<!-- BLOG SECTION -->
+<section class="section hidden" id="blog">
+  <div class="container">
+    <h2>📚 Blog Tentang Trisha</h2>
+    <p class="intro">Kumpulan cerita, artikel, dan tulisan tentang Trisha JKT48.</p>
+    
+    <div class="blog-grid">
+      <!-- Artikel 1 -->
+      <article class="blog-card">
+        <h3>✨ Hobi Menggambar, Trisha JKT48 Suka ke Museum</h3>
+        <p>Trisha JKT48 sudah mencuri hati penggemar sejak diperkenalkannya sebagai trainee termuda dari generasi 12. Trisha yang suka hal-hal berbau seni sudah memiliki hobi melukis dan menari sejak masih kecil....</p>
+        <a href="https://www.idntimes.com/hype/entertainment/hobi-menggambar-trisha-jkt48-suka-ke-museum-c1c2-01-hjrfk-0hd408" class="btn small">Baca Selengkapnya</a>
+      </article>
+
+      <!-- Artikel 2 -->
+      <article class="blog-card">
+        <h3>✨ Fakta Wisuda Jazzlyn Trisha JKT48 yang Baru Lulus SD</h3>
+        <p>Trisha baru saja membagikan momen kelulusannya dari bangku SD melalui akun Instagram miliknya. Simak potret wisuda Trisha JKT48 beserta fakta menarik tentangnya, yuk!</p>
+        <a href="https://www.idntimes.com/hype/entertainment/fakta-wisuda-jazzlyn-trisha-jkt48-yang-baru-lulus-sd-01-hjrfk-txp2rm" class="btn small">Baca Selengkapnya</a>
+      </article>
+
+      <!-- Artikel 3 -->
+      <article class="blog-card">
+        <h3>💖 Global Center Baru Pajama Drive</h3>
+        <p>Trisha gen 12: Global Center Baru Setlist Theater Pajama Drive...</p>
+        <a href="https://www.instagram.com/p/DJMOOz8Tj8d/" class="btn small">Baca Selengkapnya</a>
+      </article>
+
+      <!-- Artikel 4 -->
+      <article class="blog-card">
+        <h3>💖 Global Center Baru Ingin Bertemu</h3>
+        <p>Trisha gen 12: Global Center Baru Setlist Theater Ingin Bertemu...</p>
+        <a href="https://www.instagram.com/p/DJeQQK_TTvl/" class="btn small">Baca Selengkapnya</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  #blog .intro {
+    margin-bottom: 16px;
+    color: #666;
+    font-style: italic;
+  }
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+  }
+.blog-card {
+  background: #1e1e2f; /* ganti dengan warna box lain biar sama */
+  border-radius: 12px;
+  padding: 16px;
+  color: #fff; /* biar teksnya tetap terbaca */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.blog-card h3 {
+  color: #ff4b8b; /* warna judul tetap biar standout */
+}
+.blog-card p {
+  color: #ddd; /* biar kontras dengan background gelap */
+}
+  .btn.small {
+    font-size: 14px;
+    padding: 6px 10px;
+    background: #d63384;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+  .btn.small:hover {
+    background: #b0256a;
+  }
+</style>
+
+<!-- ===== SOSMED ETALASE ===== -->
+<section class="section hidden" id="sosmed">
+  <div class="container">
+    <h2 class="text-center">Sosial Media Trisha</h2>
+    <div class="grid-sosmed">
+      
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/jkt48.trisha/" target="_blank" class="sosmed-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
+        <p>Instagram</p>
+      </a>
+      
+      <!-- X (Twitter) -->
+      <a href="https://x.com/JTrisha_JKT48" target="_blank" class="sosmed-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/5969/5969020.png" alt="X">
+        <p>X (Twitter)</p>
+      </a>
+      
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com/@jkt48.trisha" target="_blank" class="sosmed-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
+        <p>TikTok</p>
+      </a>
+      
+      <!-- Showroom -->
+      <a href="https://www.showroom-live.com/r/JKT48_Trisha" target="_blank" class="sosmed-card">
+        <img src="foto5.png" alt="Showroom">
+        <p>Showroom</p>
+      </a>
+      
+      <!-- Threads -->
+      <a href="https://www.threads.net/@jkt48.trisha" target="_blank" class="sosmed-card">
+        <img src="foto7.png" alt="Threads">
+        <p>Threads</p>
+      </a>
+
+      <!-- IDN Live -->
+      <a href="https://www.idn.app/jkt48_trisha" target="_blank" class="sosmed-card">
+        <img src="foto6.png" alt="IDN Live">
+        <p>IDN Live</p>
+      </a>
+
+      <!-- JKT48 Official -->
+      <a href="https://jkt48.com/member/detail/id/284?lang=id" target="_blank" class="sosmed-card">
+        <img src="foto8.png" alt="JKT48">
+        <p>JKT48</p>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .grid-sosmed {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+.sosmed-card {
+  text-align: center;
+  background: #1e293b; /* sama kayak box lain */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 15px;
+  transition: transform 0.2s;
+  text-decoration: none;
+  color: #f1f5f9;
+}
+  .sosmed-card img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  .sosmed-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  }
+  .sosmed-card p {
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .dark-mode .sosmed-card {
+    background: #1e293b;
+    color: #f1f5f9;
+  }
+  .dark-mode .sosmed-card p {
+    color: #f1f5f9;
+  }
+</style>
+
+<!-- ===== SCHEDULE ===== -->
+<section class="section hidden" id="jadwal">
+  <div class="container">
+    <h2>Jadwal & Event</h2>
+    <div class="toolbar" id="filterBar">
+      <button class="pill active" data-filter="all">Semua</button>
+      <button class="pill" data-filter="theater">Theater</button>
+      <button class="pill" data-filter="ofcevent">OFC Event</button>
+      <button class="pill" data-filter="video-call">Video Call</button>
+      <button class="pill" data-filter="meetgreet">Meet & Greet</button>
+      <button class="pill" data-filter="onoffair">On & Off Air</button>
+    </div>
+
+<div class="event" data-id="evt1" data-type="theater">
+  <div class="date">
+    <span>22</span>
+    <small>Agu</small>
+  </div>
+  <div class="info">
+    <h4>Setlist Pajama Drive · JKT48 Theater</h4>
+    <p>19.00 WIB</p>
+    <div class="k">
+      <button class="btn ghost save" data-id="evt1">Tersimpan ✅</button>
+        <div>
+          <img class="avatar" id="heroImg" alt="Foto Trisha (placeholder)" src="pajama-drive.jpg" />
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="event" data-id="evt2" data-type="theater">
+  <div class="date">
+    <span>23</span>
+    <small>Agu</small>
+  </div>
+  <div class="info">
+    <h4>Setlist Cara Meminum Ramune · JKT48 Theater</h4>
+    <p>19.00 WIB</p>
+    <div class="k">
+      <button class="btn ghost save" data-id="evt2">Tersimpan ✅</button>
+       <div>
+          <img class="avatar" id="heroImg" alt="Foto Trisha (placeholder)" src="ramune.jpg" />
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="event" data-id="evt3" data-type="ofcevent">
+  <div class="date">
+    <span>26</span>
+    <small>Agu</small>
+  </div>
+  <div class="info">
+    <h4>OFC Event “Sudden Versus #3: Good Luck, Have Fun! (Fun Shooting Competition with JKT48)” · Gandaria City Shooting Range</h4>
+    <p>15.30 WIB</p>
+    <div class="k">
+      <button class="btn ghost save" data-id="evt3">Tersimpan ✅</button>
+       <div>
+          <img class="avatar" id="heroImg" alt="Foto Trisha (placeholder)" src="ofc.jpg" />
+        </div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SAVED EVENTS ===== -->
+<section class="section hidden">
+  <div class="container">
+    <h2>Event Tersimpan (<span id="savedCount">0</span>)</h2>
+    <div id="saved-events" class="schedule"></div>
+  </div>
+</section>
+
+    <!-- GALLERY / CAROUSEL -->
+<section class="section hidden" id="galeri">
+      <div class="container">
+        <h2>Galeri</h2>
+        <div class="carousel">
+          <div class="track" id="track">
+  <a href="foto1.jpg" data-lightbox="galeri">
+    <img class="ph" src="foto1.jpg" alt="Trisha 1 (placeholder)"/>
+  </a>
+  <a href="foto2.jpg" data-lightbox="galeri">
+    <img class="ph" src="foto2.jpg" alt="Trisha 2 (placeholder)"/>
+  </a>
+  <a href="foto3.jpg" data-lightbox="galeri">
+    <img class="ph" src="foto3.jpg" alt="Trisha 3 (placeholder)"/>
+  </a>
+  <a href="foto4.jpg" data-lightbox="galeri">
+    <img class="ph" src="foto4.jpg" alt="Trisha 4 (placeholder)"/>
+  </a>
+  <a href="foto1.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto1.jpeg" alt="Trisha 5 (placeholder)"/>
+  </a>
+  <a href="foto2.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto2.jpeg" alt="Trisha 6 (placeholder)"/>
+  </a>
+  <a href="foto3.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto3.jpeg" alt="Trisha 7 (placeholder)"/>
+  </a>
+  <a href="foto4.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto4.jpeg" alt="Trisha 8 (placeholder)"/>
+  </a>
+  <a href="foto5.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto5.jpeg" alt="Trisha 9 (placeholder)"/>
+  </a>
+  <a href="foto6.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto6.jpeg" alt="Trisha 10 (placeholder)"/>
+  </a>
+  <a href="foto7.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto7.jpeg" alt="Trisha 11 (placeholder)"/>
+  </a>
+  <a href="foto8.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto8.jpeg" alt="Trisha 12 (placeholder)"/>
+  </a>
+  <a href="foto9.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto9.jpeg" alt="Trisha 13 (placeholder)"/>
+  </a>
+  <a href="foto10.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto10.jpeg" alt="Trisha 14 (placeholder)"/>
+  </a>
+  <a href="foto11.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto11.jpeg" alt="Trisha 15 (placeholder)"/>
+  </a>
+  <a href="foto12.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto12.jpeg" alt="Trisha 16 (placeholder)"/>
+  </a>
+  <a href="foto13.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto13.jpeg" alt="Trisha 17 (placeholder)"/>
+  </a>
+  <a href="foto14.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto14.jpeg" alt="Trisha 18 (placeholder)"/>
+  </a>
+  <a href="foto15.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto15.jpeg" alt="Trisha 19 (placeholder)"/>
+  </a>
+  <a href="foto16.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto16.jpeg" alt="Trisha 20 (placeholder)"/>
+  </a>
+  <a href="foto17.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto17.jpeg" alt="Trisha 21 (placeholder)"/>
+  </a>
+  <a href="foto18.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto18.jpeg" alt="Trisha 22 (placeholder)"/>
+  </a>
+  <a href="foto19.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto19.jpeg" alt="Trisha 23 (placeholder)"/>
+  </a>
+  <a href="foto20.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto20.jpeg" alt="Trisha 24 (placeholder)"/>
+  </a>
+  <a href="foto21.jpeg" data-lightbox="galeri">
+    <img class="ph" src="foto21.jpeg" alt="Trisha 25 (placeholder)"/>
+  </a>
+</div>
+          <div class="ctrl">
+            <button class="prev" aria-label="Sebelumnya" id="prev">⟨</button>
+            <button class="next" aria-label="Berikutnya" id="next">⟩</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEDIA -->
+<section class="section hidden" id="video">
+  <div class="container">
+    <h2>Video Favorit</h2>
+    <div class="slider">
+      <div class="slider-wrapper">
+        <!-- Video 1 -->
+        <div class="video-card">
+          <img class="thumb" src="https://img.youtube.com/vi/osOtCl1QfZw/hqdefault.jpg" alt="Video 1">
+          <div class="play-overlay">▶</div>
+        </div>
+        <!-- Video 2 -->
+        <div class="video-card">
+          <img class="thumb" src="https://img.youtube.com/vi/vBgoWEzdYQ0/hqdefault.jpg" alt="Video 2">
+          <div class="play-overlay">▶</div>
+        </div>
+        <!-- Video 3 -->
+        <div class="video-card">
+          <img class="thumb" src="https://img.youtube.com/vi/FzEQFvYyQIs/hqdefault.jpg" alt="Video 3">
+          <div class="play-overlay">▶</div>
+        </div>
+        <!-- Video 4 -->
+        <div class="video-card">
+          <img class="thumb" src="https://img.youtube.com/vi/BWYWAFG0kDs/hqdefault.jpg" alt="Video 4">
+          <div class="play-overlay">▶</div>
+        </div>
+        <!-- Video 5 -->
+        <div class="video-card">
+          <img class="thumb" src="https://img.youtube.com/vi/mroU8dfVlP0/hqdefault.jpg" alt="Video 5">
+          <div class="play-overlay">▶</div>
+        </div>
+        <!-- Video 6 -->
+        <div class="video-card">
+          <img class="thumb" src="https://img.youtube.com/vi/Ztg79dr34n4/hqdefault.jpg" alt="Video 6">
+          <div class="play-overlay">▶</div>
+        </div>
+        <!-- Video 7 -->
+        <div class="video-card">
+          <img class="thumb" src="https://img.youtube.com/vi/TwbCMtqCL2k/hqdefault.jpg" alt="Video 7">
+          <div class="play-overlay">▶</div>
+        </div>
+        <!-- Video 8 -->
+        <div class="video-card">
+          <img class="thumb" src="https://img.youtube.com/vi/KV7OJLiMu6g/hqdefault.jpg" alt="Video 8">
+          <div class="play-overlay">▶</div>
+        </div>
+        <!-- Video 9 -->
+        <div class="video-card">
+          <img class="thumb" src="https://img.youtube.com/vi/yzfHyMB5nn4/hqdefault.jpg" alt="Video 9">
+          <div class="play-overlay">▶</div>
+        </div>
+        <!-- Video 10 -->
+        <div class="video-card">
+          <img class="thumb" src="https://img.youtube.com/vi/t8E0ta8w49M/hqdefault.jpg" alt="Video 10">
+          <div class="play-overlay">▶</div>
+        </div>
+        <!-- Video 11 -->
+        <div class="video-card">
+          <img class="thumb" src="https://img.youtube.com/vi/bbDjkGD_f84/hqdefault.jpg" alt="Video 11">
+          <div class="play-overlay">▶</div>
+        </div>
+        <!-- Video 12 -->
+        <div class="video-card">
+          <img class="thumb" src="https://img.youtube.com/vi/t9HJrE_HpXw/hqdefault.jpg" alt="Video 12">
+          <div class="play-overlay">▶</div>
+        </div>
+        <!-- Video 13 -->
+        <div class="video-card">
+          <img class="thumb" src="https://img.youtube.com/vi/uyNL6bNVWzo/hqdefault.jpg" alt="Video 13">
+          <div class="play-overlay">▶</div>
+        </div>
+      </div>
+      <button class="prev-btn">‹</button>
+      <button class="next-btn">›</button>
+    </div>
+  </div>
+</section>
+
+<style>
+.slider {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  margin-bottom: 24px;
+}
+.slider-wrapper {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+.video-card {
+  min-width: 100%;
+  position: relative;
+  cursor: pointer;
+}
+.thumb {
+  display: block;
+  width: 100%;
+  border-radius: 14px;
+}
+.play-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
+  border-radius: 50%;
+}
+.prev-btn, .next-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  font-size: 24px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }
+</style>
+
+<script>
+const wrapper = document.querySelector('.slider-wrapper');
+const cards = Array.from(wrapper.children);
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
+let idx = 0;
+
+function updateSlide() {
+  wrapper.style.transform = `translateX(-${idx * 100}%)`;
+}
+
+nextBtn.addEventListener('click', () => {
+  idx = (idx + 1) % cards.length;
+  updateSlide();
+});
+prevBtn.addEventListener('click', () => {
+  idx = (idx - 1 + cards.length) % cards.length;
+  updateSlide();
+});
+
+cards.forEach((card, i) => {
+  card.addEventListener('click', () => {
+    const videoIds = ["osOtCl1QfZw","vBgoWEzdYQ0","FzEQFvYyQIs","BWYWAFG0kDs","mroU8dfVlP0","Ztg79dr34n4","TwbCMtqCL2k","KV7OJLiMu6g","yzfHyMB5nn4","t8E0ta8w49M","bbDjkGD_f84","t9HJrE_HpXw"];
+    card.innerHTML = `
+      <iframe src="https://www.youtube.com/embed/${videoIds[i]}?autoplay=1"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              style="width: 100%; height: 360px; border-radius: 14px;">
+      </iframe>`;
+  });
+});
+</script>
+
+<!-- ===== QUIZ ===== -->
+<section class="section hidden" id="quiz">
+  <div class="container grid">
+    <article class="card shadow hidden" style="grid-column:span 12">
+      <h2>Kuis Seru 🎯</h2>
+      <h2>Buktikan kalau kamu benar-benar Trisha Oshi!</h2>
+
+      <div class="quiz-track" id="quizTrack">
+        <div class="quiz-card">
+          <h3>Pertanyaan 1: Kapan Tanggal Lahir Trisha?</h3>
+          <button class="quiz-option" data-correct="true">16 Februari 2011</button>
+          <button class="quiz-option">10 Februari 2010</button>
+          <button class="quiz-option">26 Agustus 2006</button>
+        </div>
+
+        <div class="quiz-card">
+          <h3>Pertanyaan 2: Hewan Apa yang Pernah digambar oleh Trisha?</h3>
+          <button class="quiz-option">Cicak</button>
+          <button class="quiz-option" data-correct="true">Sapi Terbang</button>
+          <button class="quiz-option" data-correct="true">Naga</button>
+        </div>
+
+        <div class="quiz-card">
+          <h3>Pertanyaan 3: Ejaan Kepanjangan Nama Trisha yang Benar?</h3>
+          <button class="quiz-option" data-correct="true">Jazzlyn Agatha Trisha</button>
+          <button class="quiz-option">Jesslyn Agatha Trisha</button>
+          <button class="quiz-option">Jazzlyn Aghata Trisna</button>
+        </div>
+
+        <div class="quiz-card">
+          <h3>Pertanyaan 4: Hewan apa yang ditakuti oleh Trisha?</h3>
+          <button class="quiz-option" data-correct="true">Cicak</button>
+          <button class="quiz-option">Sapi Terbang</button>
+          <button class="quiz-option">Naga</button>
+        </div>
+
+        <div class="quiz-card">
+          <h3>Pertanyaan 5: Dimana Tempat Trisha ingin Tinggali?</h3>
+          <button class="quiz-option">Pantai</button>
+          <button class="quiz-option" data-correct="true">Gunung</button>
+          <button class="quiz-option">Theater</button>
+        </div>
+
+        <div class="quiz-card">
+          <h3>Pertanyaan 6: Apa Nama Fanbase Trisha?</h3>
+          <button class="quiz-option">Trishalicious</button>
+          <button class="quiz-option">Trishalions</button>
+          <button class="quiz-option" data-correct="true">TACT</button>
+        </div>
+
+        <div class="quiz-card">
+          <h3>Pertanyaan 7: Pintu Masuk Isekai yang Ada di Rumah Trisha?</h3>
+          <button class="quiz-option">Lukisan</button>
+          <button class="quiz-option">Boneka</button>
+          <button class="quiz-option" data-correct="true">Kulkas</button>
+        </div>
+
+        <div class="quiz-card">
+          <h3>Pertanyaan 8: Berapa Tinggi Badan Trisha?</h3>
+          <button class="quiz-option" data-correct="true">164 cm</button>
+          <button class="quiz-option">160 cm</button>
+          <button class="quiz-option">165 cm</button>
+        </div>
+
+        <div class="quiz-card">
+          <h3>Pertanyaan 9: Kapan Pertama Kali Trisha Ponian?</h3>
+          <button class="quiz-option" data-correct="true">4 Agustus 2024</button>
+          <button class="quiz-option">20 Juni 2024</button>
+          <button class="quiz-option">16 Juli 2024</button>
+        </div>
+
+        <div class="quiz-card">
+          <h3>Pertanyaan 10: Kalian sayang sama Trisha?</h3>
+          <button class="quiz-option" data-correct="true">Sayang lah</button>
+          <button class="quiz-option" data-correct="true">BANGETTTT</button>
+          <button class="quiz-option" data-correct="true">Sayang, cinta, peduli lindungi Trisha</button>
+        </div>
+      </div>
+
+      <div class="quiz-controls">
+        <button id="quizPrev" class="btn">⬅️</button>
+        <button id="quizNext" class="btn">➡️</button>
+      </div>
+
+      <div class="quiz-feedback" id="quizFeedback"></div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .quiz-track {
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  .quiz-card {
+    flex: 0 0 100%;
+    padding: 20px;
+  }
+  .quiz-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .quiz-feedback {
+    margin-top: 16px;
+    font-weight: bold;
+    text-align: center;
+  }
+</style>
+
+<!-- ===== MINI PUZZLE TRISHA 3x3 (stabil & rapi) ===== -->
+<section class="section hidden" id="pz3-section">
+  <div class="container">
+    <article class="pz3-card">
+      <div class="pz3-head">
+        <h2>🧩 Mini Puzzle Trisha (3×3)</h2>
+        <div class="pz3-controls">
+          <button id="pz3-shuffle" class="pz3-btn">🔀 Shuffle</button>
+          <button id="pz3-reset" class="pz3-btn ghost">♻️ Reset</button>
+          <span class="pz3-info">Langkah: <strong id="pz3-moves">0</strong></span>
+        </div>
+      </div>
+
+      <div id="pz3-board" class="pz3-board" role="grid" aria-label="Puzzle 3x3"></div>
+
+      <p class="pz3-tip">Tip: klik potongan yang menempel kotak kosong untuk memindahkannya.</p>
+    </article>
+  </div>
+</section>
+
+<!-- popup selesai -->
+<div id="pz3-popup" class="pz3-popup pz3-hidden" aria-hidden="true">
+  <div class="pz3-popup-box" role="dialog" aria-modal="true">
+    <h3>🎉 Selamat! 🎉</h3>
+    <p>Kamu berhasil menyusun puzzle Trisha ✨</p>
+    <div style="margin-top:12px">
+      <button id="pz3-ok" class="pz3-btn">Oke</button>
+    </div>
+  </div>
+</div>
+
+<style>
+/* ----------------- Puzzle 3x3 styles (unique names) ----------------- */
+.pz3-card {
+  padding: 18px;
+  background: var(--card);
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.45);
+  max-width: 760px;
+  margin: 0 auto;
+}
+.pz3-head { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+.pz3-controls { display:flex; gap:8px; align-items:center; }
+
+.pz3-btn {
+  background: linear-gradient(135deg,var(--brand),var(--brand-2));
+  color: #fff; border:0; padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:600;
+}
+.pz3-btn.ghost { background: transparent; border:1px solid rgba(255,255,255,.08); color:var(--text); }
+
+.pz3-info { color:var(--sub); font-size:14px; margin-left:6px; }
+
+.pz3-board {
+  margin: 14px auto 6px;
+  width: min(420px, 86vw);
+  height: min(420px, 86vw);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 6px;
+  background: rgba(0,0,0,0.06);
+  padding: 6px;
+  border-radius: 10px;
+  justify-items: stretch;
+  align-items: stretch;
+  touch-action: manipulation;
+}
+
+.pz3-tile {
+  border-radius: 8px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 300% 300%; /* updated dynamically in JS but safe fallback */
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+  display:flex; align-items:center; justify-content:center;
+  user-select: none;
+  font-weight:700;
+  color: transparent;
+}
+.pz3-tile:active { transform: scale(.98); }
+.pz3-empty {
+  background: linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.06));
+  cursor: default;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+.pz3-tip { text-align:center; color:var(--sub); margin-top:8px; font-size:14px; }
+
+/* popup */
+.pz3-popup { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background: rgba(0,0,0,0.55); z-index:9999; }
+.pz3-hidden { display:none; }
+.pz3-popup-box {
+  background: var(--card);
+  padding: 20px 26px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* responsive tweaks */
+@media (max-width: 540px) {
+  .pz3-board { gap:4px; }
+  .pz3-card { padding:14px; }
+  .pz3-btn { padding:7px 10px; font-size:14px; }
+}
+</style>
+
+<!-- FREEBIES SECTION -->
+<section class="section hidden" id="freebies">
+  <div class="container">
+    <h2>🎁 Freebies</h2>
+    <p class="intro">Kumpulan wallpaper, live, dan perjalanan Trisha di JKT48.</p>
+    
+    <div class="blog-grid">
+      <!-- Artikel 1 -->
+      <article class="blog-card">
+        <h3>🎁 Wallpaper</h3>
+        <p>Di sini kamu bisa menemukan kumpulan wallpaper Trisha yang super imut, kawaii, dan pastinya manis banget. Senyum dan ekspresinya yang gemas bikin setiap gambar terasa hidup. Pas banget buat jadi teman di layar HP atau laptop kamu sebagai pengingat semangat dari Trisha.</p>
+        <a href="https://drive.google.com/drive/folders/1MInKoYzXDbFuwWo74bBITAA04DiMqWwR?usp=drive_link" class="btn small">Lihat Selengkapnya</a>
+      </article>
+
+      <!-- Artikel 2 -->
+      <article class="blog-card">
+        <h3>🎁 Replay Live IDN</h3>
+        <p>Ketinggalan live Trisha di IDN? Tenang, di sini ada kumpulan replay yang bisa kamu tonton kapan saja. Mulai dari sapaan manis sampai obrolan seru bareng member lain, semuanya bikin fans makin sayang sama Trisha.</p>
+        <a href="https://www.youtube.com/watch?v=kAd8lD08T8k&list=PLKul60FnRkpQWeHcNeseBVbiLyyLFNsox&index=1" class="btn small">Lihat Selengkapnya</a>
+      </article>
+
+      <!-- Artikel 3 -->
+      <article class="blog-card">
+        <h3>🎁 Replay Live Showroom</h3>
+        <p>Replay live Trisha di aplikasi Showroom adalah cara asyik untuk merasakan kembali energi dan pesonanya langsung dari layar kamu. Tiap siaran menghadirkan senyum, candaan, dan kehangatan yang bikin hati fans makin meleleh. Yuk, selami lagi momen-momen cerianya bareng Trisha kapan pun kamu mau.</p>
+        <a href="https://www.youtube.com/watch?v=6Tg4DjCFzAo&list=PLX15XB_3XZuSC9EhaC156WMDJUl91HFD5" class="btn small">Lihat Selengkapnya</a>
+      </article>
+
+      <!-- Artikel 4 -->
+      <article class="blog-card">
+        <h3>🎁 Perjalanan Trisha di JKT48</h3>
+        <p>Mau tahu jadwal Trisha JKT48? Di sini ada kumpulan lengkap mulai dari show, off air, on air, meet and greet, video call, sampai YouTube. Jadwal ini dibuat khusus oleh Kak Febi supaya para fans nggak ketinggalan momen bareng Trisha.</p>
+        <a href="https://docs.google.com/spreadsheets/d/1snKxhqO5uzLyFLIVoE5DlInKZ3FwiffAqkrPgRAZ7xQ/edit?gid=0#gid=0" class="btn small">Lihat Selengkapnya</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+    <!-- FANBOARD -->
+    <section class="section hidden" id="fanboard">
+      <div class="container">
+        <h2>Papan Pesan Fans 💌</h2>
+        <form id="fanForm" class="card" style="margin-bottom:12px">
+          <label>Nama (opsional)
+            <input id="fanName" type="text" placeholder="cth. Rasya" style="width:100%;margin-top:6px;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:#0f0f17;color:var(--text)">
+          </label>
+          <label style="display:block;margin-top:10px">Pesan
+            <textarea id="fanMsg" rows="3" placeholder="Tulis dukunganmu untuk Trisha…" style="width:100%;margin-top:6px;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:#0f0f17;color:var(--text)"></textarea>
+          </label>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
+            <button class="btn primary" type="submit">Kirim</button>
+            <button class="btn ghost" type="button" id="clearBoard">Hapus Semua</button>
+          </div>
+        </form>
+        <div class="fanboard" id="fanList"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>© <span id="year"></span> Fansite of Trisha - Dibuat oleh: Rasya Syawal.</div>
+      <div class="k">Hak cipta media milik pemilik masing-masing.</div>
+    </div>
+  </footer>
+
+<script>
+  // ===== Utilities =====
+  const $ = (s,root=document)=> root.querySelector(s);
+  const $$ = (s,root=document)=> [...root.querySelectorAll(s)];
+  const store = {
+    get(k,fall){try{return JSON.parse(localStorage.getItem(k)) ?? fall}catch{return fall}},
+    set(k,v){localStorage.setItem(k,JSON.stringify(v))}
+  }
+
+  // ===== Floating Hearts =====
+  function spawnHeart(x,y){
+    const el=document.createElement('div');
+    el.className='heart';
+    el.style.left=x+'px';
+    el.style.top=y+'px';
+    el.textContent='💗';
+    el.style.fontSize=(Math.random()*14+18)+'px';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),1200);
+  }
+
+// ===== Schedule filter & save =====
+const SAVED_KEY = 'trisha_saved_events';
+const saved = new Set(store.get(SAVED_KEY, []));
+
+function updateSavedCounters(){
+  // update semua elemen yang (kebetulan) pakai id "savedCount" (bisa lebih dari satu)
+  $$('[id="savedCount"]').forEach(el => el.textContent = saved.size);
+}
+
+function renderSavedEvents(){
+  const savedContainer = $('#saved-events');
+  if(!savedContainer){ updateSavedCounters(); return; }
+
+  savedContainer.innerHTML = '';
+
+  // buang ID yang sudah tidak ada di jadwal utama
+  Array.from(saved).forEach(id => {
+    if(!document.querySelector(`.save[data-id="${id}"]`)) saved.delete(id);
+  });
+
+  // tampilkan daftar tersimpan
+  saved.forEach(id => {
+    const original = document.querySelector(`.save[data-id="${id}"]`)?.closest('.event');
+    if(!original) return;
+    const clone = original.cloneNode(true);
+
+    // tombol di daftar tersimpan = Hapus
+    const btn = clone.querySelector('.save');
+    if(btn){
+      btn.textContent = 'Hapus ❌';
+      btn.addEventListener('click', () => {
+        saved.delete(id);
+        store.set(SAVED_KEY, [...saved]);
+        const origBtn = document.querySelector(`.save[data-id="${id}"]`);
+        if(origBtn) origBtn.textContent = 'Simpan';
+        renderSavedEvents();
+      });
+    }
+
+    savedContainer.appendChild(clone);
+  });
+
+  store.set(SAVED_KEY, [...saved]);
+  updateSavedCounters();
+}
+
+// inisialisasi tombol simpan di jadwal utama
+$$('.save').forEach(btn => {
+  const id = btn.dataset.id;
+  if(saved.has(id)) btn.textContent = 'Tersimpan ✅';
+  btn.addEventListener('click', () => {
+    if(saved.has(id)){ saved.delete(id); btn.textContent = 'Simpan'; }
+    else { saved.add(id); btn.textContent = 'Tersimpan ✅'; }
+    store.set(SAVED_KEY, [...saved]);
+    renderSavedEvents();
+  });
+});
+
+// filter bar
+$('#filterBar').addEventListener('click', e => {
+  const b = e.target.closest('.pill'); if(!b) return;
+  $$('.pill').forEach(p => p.classList.remove('active'));
+  b.classList.add('active');
+  const f = b.dataset.filter;
+  $$('.event').forEach(ev => {
+    ev.style.display = (f === 'all' || ev.dataset.type === f) ? 'flex' : 'none';
+  });
+});
+
+// render awal
+renderSavedEvents();
+
+  // ===== Carousel controls =====
+  const track = $('#track');
+  $('#prev').onclick=()=>track.scrollBy({left:-300,behavior:'smooth'});
+  $('#next').onclick=()=>track.scrollBy({left: 300,behavior:'smooth'});
+
+  // ===== Fanboard =====
+  const LIST_KEY='trisha_fanboard_v1';
+  const listEl = $('#fanList');
+  function renderFanboard(){
+    const data = store.get(LIST_KEY,[]);
+    listEl.innerHTML='';
+    data.forEach(({name,msg,time,likes},i)=>{
+      const card=document.createElement('div'); card.className='fan-card';
+      card.innerHTML=`<div style="display:flex;justify-content:space-between;gap:8px;align-items:start">
+        <div>
+          <strong>${name||'Anon'}</strong>
+          <p style="margin:4px 0 0">${msg}</p>
+        </div>
+        <button class="btn" data-like="${i}">💗 ${likes||0}</button>
+      </div>
+      <div class="meta"><span>${new Date(time).toLocaleString()}</span><button class="btn ghost" data-del="${i}">Hapus</button></div>`;
+      listEl.appendChild(card);
+    });
+  }
+  renderFanboard();
+
+  $('#fanForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const name=$('#fanName').value.trim();
+    const msg=$('#fanMsg').value.trim();
+    if(!msg){ alert('Pesan masih kosong.'); return; }
+    const data=store.get(LIST_KEY,[]);
+    data.unshift({name,msg,time:Date.now(),likes:0});
+    store.set(LIST_KEY,data);
+    $('#fanMsg').value=''; renderFanboard();
+    spawnHeart(innerWidth-60, innerHeight-60);
+  });
+
+  $('#clearBoard').addEventListener('click',()=>{
+    if(confirm('Hapus semua pesan?')){ store.set(LIST_KEY,[]); renderFanboard(); }
+  });
+
+  listEl.addEventListener('click',e=>{
+    const likeBtn = e.target.closest('[data-like]');
+    const delBtn = e.target.closest('[data-del]');
+    const data=store.get(LIST_KEY,[]);
+    if(likeBtn){ const i=+likeBtn.dataset.like; data[i].likes=(data[i].likes||0)+1; store.set(LIST_KEY,data); renderFanboard(); }
+    if(delBtn){ const i=+delBtn.dataset.del; if(confirm('Hapus pesan ini?')){ data.splice(i,1); store.set(LIST_KEY,data); renderFanboard(); }}
+  });
+
+  // ===== Year =====
+  $('#year').textContent = new Date().getFullYear();
+
+// ===== Musik Toggle =====
+  const music = document.getElementById("bg-music");
+  const toggleBtn = document.getElementById("music-toggle");
+
+  toggleBtn.addEventListener("click", () => {
+    if (music.muted || music.paused) {
+      music.muted = false;
+      music.play();
+      toggleBtn.textContent = "🔊";
+    } else {
+      music.muted = true;
+      toggleBtn.textContent = "🔇";
+    }
+  });
+
+  // ===== Scroll Animation =====
+  const hiddenEls = document.querySelectorAll(".hidden");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      } else {
+        entry.target.classList.remove("show"); // biar animasi bisa muncul lagi tiap scroll
+      }
+    });
+  }, { threshold: 0.2 });
+
+  hiddenEls.forEach((el) => observer.observe(el));
+
+<!-- ===== SCRIPT GESTURE SWIPE ===== -->
+(function(){
+  const sideMenu = document.getElementById('sideMenu');
+  const overlay = document.getElementById('overlay');
+  const links = sideMenu.querySelectorAll('a');
+
+  function closeMenu(){
+    sideMenu.classList.remove('open');
+    overlay.classList.remove('show');
+  }
+
+  function openMenu(){
+    sideMenu.classList.add('open');
+    overlay.classList.add('show');
+  }
+
+  overlay.onclick = closeMenu;
+  links.forEach(link => link.onclick = closeMenu);
+
+  // ==== Swipe HP ====
+  let startX = 0;
+  document.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+  });
+
+  document.addEventListener('touchend', e => {
+    let endX = e.changedTouches[0].clientX;
+    if(startX < 50 && endX - startX > 80){ 
+      openMenu();
+    }
+  });
+
+  // ==== Mouse Drag untuk Laptop ====
+  let mouseDown = false;
+  let mouseStartX = 0;
+
+  document.addEventListener('mousedown', e => {
+    if(e.clientX < 50){ // mulai dari tepi kiri
+      mouseDown = true;
+      mouseStartX = e.clientX;
+    }
+  });
+
+  document.addEventListener('mouseup', e => {
+    if(mouseDown){
+      let diffX = e.clientX - mouseStartX;
+      if(diffX > 80){ // drag kanan
+        openMenu();
+      }
+      mouseDown = false;
+    }
+  });
+
+  // ==== Keyboard Shortcut ====
+  document.addEventListener('keydown', e => {
+    if(e.key.toLowerCase() === 'm'){ // tekan M
+      if(sideMenu.classList.contains('open')){
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    }
+  });
+
+})();
+
+ const sideMenu = document.getElementById('sideMenu');
+  const overlay = document.getElementById('overlay');
+  const menuBtn = document.getElementById('menuBtn');
+
+  function openMenu(){
+    sideMenu.classList.add('open');
+    overlay.classList.add('show');
+  }
+  function closeMenu(){
+    sideMenu.classList.remove('open');
+    overlay.classList.remove('show');
+  }
+
+  menuBtn.onclick = openMenu;
+  overlay.onclick = closeMenu;
+
+  const quizTrack = document.getElementById("quizTrack");
+  const quizCards = document.querySelectorAll(".quiz-card");
+  const feedback = document.getElementById("quizFeedback");
+  let currentQuiz = 0;
+  let score = 0;
+  let answered = Array(quizCards.length).fill(false);
+
+  document.getElementById("quizPrev").onclick = () => {
+    if (currentQuiz > 0) {
+      currentQuiz--;
+      quizTrack.scrollTo({ left: quizCards[currentQuiz].offsetLeft, behavior: 'smooth' });
+    }
+  };
+
+  document.getElementById("quizNext").onclick = () => {
+    goToNext();
+  };
+
+  document.querySelectorAll(".quiz-option").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const cardIndex = Array.from(quizCards).indexOf(btn.closest(".quiz-card"));
+      
+      if (!answered[cardIndex]) {
+        if (btn.dataset.correct) {
+          score++;
+          feedback.textContent = "✅ Jawaban Benar!";
+          feedback.style.color = "lime";
+        } else {
+          feedback.textContent = "❌ Jawaban Salah!";
+          feedback.style.color = "red";
+        }
+        answered[cardIndex] = true;
+
+        // kasih jeda dikit biar feedback sempat kelihatan
+        setTimeout(() => {
+          if (cardIndex < quizCards.length - 1) {
+            currentQuiz++;
+            quizTrack.scrollTo({ left: quizCards[currentQuiz].offsetLeft, behavior: 'smooth' });
+          } else {
+            showResult();
+          }
+        }, 700);
+      }
+    });
+  });
+
+  function goToNext() {
+    if (currentQuiz < quizCards.length - 1) {
+      currentQuiz++;
+      quizTrack.scrollTo({ left: quizCards[currentQuiz].offsetLeft, behavior: 'smooth' });
+
+      if (currentQuiz === quizCards.length - 1 && answered.every(x => x)) {
+        setTimeout(showResult, 500);
+      }
+    }
+  }
+
+  function showResult() {
+    let message = "";
+    if (score === quizCards.length) {
+      message = "🎉 Kamu adalah Trisha oshi sejati!";
+    } else if (score >= quizCards.length - 2) {
+      message = "👍 Kamu lumayan tahu tentang Trisha!";
+    } else if (score >= quizCards.length - 5) {
+      message = "🤔 Hmm... aku ragu kamu bukan Trisha oshi";
+    } else {
+      message = "😢 Kamu bukan Trisha oshi";
+    }
+
+    feedback.textContent = `Skor kamu: ${score}/${quizCards.length} ➡️ ${message}`;
+    feedback.style.color = "gold";
+  }
+
+  function updateCountdown() {
+    const now = new Date();
+    const year = now.getMonth() > 1 || (now.getMonth() === 1 && now.getDate() > 16)
+      ? now.getFullYear() + 1 : now.getFullYear(); 
+
+    const targetDate = new Date(year, 1, 16, 0, 0, 0); // 16 Februari
+    const diff = targetDate - now;
+
+    if (diff <= 0) {
+      document.getElementById("countdown-timer").innerHTML = "🎉 Selamat Ulang Tahun Trisha! 🎂🎈";
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+  }
+
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+/* ----------------- Puzzle 3x3 logic (stable) ----------------- */
+/*
+  How it works:
+  - board[] holds tile values: 1..(N-1) and 0 for empty
+  - goal is [1,2,...,8,0]
+  - renderBoard() rebuilds tiles based on board[]
+  - click a tile -> if adjacent to empty -> swap and render
+  - shuffle does many legal random moves (so always solvable)
+  - during shuffle interactions disabled
+*/
+
+(() => {
+  const BOARD_SIZE = 3;
+  const TILE_COUNT = BOARD_SIZE * BOARD_SIZE; // 9
+  const IMAGE_SRC = "foto22.jpeg"; // <-- ganti kalau nama file gambarmu beda
+  const SHUFFLE_STEPS = 60;     // jumlah langkah acak saat shuffle
+  const SHUFFLE_DELAY = 14;     // ms per langkah (animasi cepat)
+
+  const boardEl = document.getElementById("pz3-board");
+  const movesEl = document.getElementById("pz3-moves");
+  const shuffleBtn = document.getElementById("pz3-shuffle");
+  const resetBtn = document.getElementById("pz3-reset");
+  const popup = document.getElementById("pz3-popup");
+  const okBtn = document.getElementById("pz3-ok");
+
+  let board = [];      // current board array
+  let moves = 0;
+  let isShuffling = false;
+
+  const goal = Array.from({length: TILE_COUNT}, (_, i) => i === TILE_COUNT-1 ? 0 : i+1);
+
+  // helpers
+  const idxToRC = idx => [Math.floor(idx / BOARD_SIZE), idx % BOARD_SIZE];
+  const rcToIdx = (r,c) => r*BOARD_SIZE + c;
+  const isAdjacent = (i1, i2) => {
+    const [r1,c1] = idxToRC(i1);
+    const [r2,c2] = idxToRC(i2);
+    return Math.abs(r1-r2) + Math.abs(c1-c2) === 1;
+  };
+
+  function initBoard() {
+    board = goal.slice(); // solved
+    moves = 0; updateMoves();
+    renderBoard();
+  }
+
+  function renderBoard() {
+    // clear and recreate tiles (simple, reliable)
+    boardEl.innerHTML = "";
+    for (let i = 0; i < TILE_COUNT; i++) {
+      const val = board[i]; // 0 == empty
+      const tile = document.createElement("button");
+      tile.className = val === 0 ? "pz3-tile pz3-empty" : "pz3-tile";
+      tile.type = "button";
+      tile.dataset.index = i;
+      tile.dataset.val = val;
+      tile.setAttribute("aria-label", val === 0 ? "kosong" : `potongan ${val}`);
+      tile.style.backgroundImage = val === 0 ? "" : `url("${IMAGE_SRC}")`;
+
+      if (val !== 0) {
+        const correctIdx = val - 1; // mapping: value 1 -> pos 0 (row0,col0)
+        const [cr, cc] = idxToRC(correctIdx);
+        // background position: col% and row% across (BOARD_SIZE-1)
+        const posX = (cc / (BOARD_SIZE - 1)) * 100;
+        const posY = (cr / (BOARD_SIZE - 1)) * 100;
+        tile.style.backgroundPosition = `${posX}% ${posY}%`;
+        tile.style.backgroundSize = `${BOARD_SIZE * 100}% ${BOARD_SIZE * 100}%`;
+      }
+
+      // visual focus & pointer
+      if (val !== 0) tile.addEventListener("click", onTileClick);
+      else tile.setAttribute("aria-hidden", "true");
+
+      boardEl.appendChild(tile);
+    }
+  }
+
+  function onTileClick(e) {
+    if (isShuffling) return;
+    const idx = Number(e.currentTarget.dataset.index);
+    attemptMove(idx, true);
+  }
+
+  function getEmptyIndex() {
+    return board.indexOf(0);
+  }
+
+  function attemptMove(tileIndex, countMove = true) {
+    const emptyIndex = getEmptyIndex();
+    if (!isAdjacent(tileIndex, emptyIndex)) return false;
+    // swap
+    [board[tileIndex], board[emptyIndex]] = [board[emptyIndex], board[tileIndex]];
+    if (countMove) {
+      moves++;
+      updateMoves();
+    }
+    renderBoard();
+    if (!isShuffling) checkWin();
+    return true;
+  }
+
+  function updateMoves() {
+    movesEl.textContent = moves;
+  }
+
+  // Shuffle by performing legal random moves
+  function shuffleBoard() {
+    if (isShuffling) return;
+    isShuffling = true;
+    shuffleBtn.disabled = true;
+    resetBtn.disabled = true;
+    let steps = SHUFFLE_STEPS;
+    // perform steps with timeout to show movement
+    const timer = setInterval(() => {
+      const empty = getEmptyIndex();
+      const [er, ec] = idxToRC(empty);
+      const neighbors = [];
+      [[er-1,ec],[er+1,ec],[er,ec-1],[er,ec+1]].forEach(([r,c]) => {
+        if (r >= 0 && r < BOARD_SIZE && c >= 0 && c < BOARD_SIZE) neighbors.push(rcToIdx(r,c));
+      });
+      // choose random neighbor and move it into empty
+      const choice = neighbors[Math.floor(Math.random() * neighbors.length)];
+      attemptMove(choice, false); // don't count or check win during shuffle
+      if (--steps <= 0) {
+        clearInterval(timer);
+        isShuffling = false;
+        shuffleBtn.disabled = false;
+        resetBtn.disabled = false;
+        moves = 0;
+        updateMoves();
+      }
+    }, SHUFFLE_DELAY);
+  }
+
+  function checkWin() {
+    for (let i = 0; i < TILE_COUNT; i++) {
+      if (board[i] !== goal[i]) return false;
+    }
+    // won!
+    showPopup();
+    return true;
+  }
+
+  function showPopup() {
+    popup.classList.remove("pz3-hidden");
+    popup.setAttribute("aria-hidden", "false");
+  }
+  function closePopup() {
+    popup.classList.add("pz3-hidden");
+    popup.setAttribute("aria-hidden", "true");
+  }
+
+  // reset to solved state (no shuffle)
+  function resetBoard() {
+    initBoard();
+  }
+
+  // event bindings
+  shuffleBtn.addEventListener("click", shuffleBoard);
+  resetBtn.addEventListener("click", resetBoard);
+  okBtn.addEventListener("click", () => { closePopup(); initBoard(); });
+
+  // keyboard accessibility (arrow keys to move tile into empty)
+  document.addEventListener("keydown", (e) => {
+    if (isShuffling) return;
+    const key = e.key;
+    const empty = getEmptyIndex();
+    const [er, ec] = idxToRC(empty);
+    let target = null;
+    if (key === "ArrowUp") target = rcToIdx(er+1, ec);     // move tile below up
+    if (key === "ArrowDown") target = rcToIdx(er-1, ec);
+    if (key === "ArrowLeft") target = rcToIdx(er, ec+1);
+    if (key === "ArrowRight") target = rcToIdx(er, ec-1);
+    if (target !== null) {
+      // ensure valid
+      const [tr, tc] = idxToRC(target);
+      if (tr >= 0 && tr < BOARD_SIZE && tc >= 0 && tc < BOARD_SIZE) {
+        attemptMove(target, true);
+      }
+    }
+  });
+
+  // initialize
+  initBoard();
+
+})();
+</script>
+</body>
+</html>
